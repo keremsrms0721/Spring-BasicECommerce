@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-md navbar-dark  bg-dark"
+	th:fragment="nav-frontend">
+	<a class="navbar-brand" href="/">Home</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarsExampleDefault"
+		aria-controls="navbarsExampleDefault" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active dropdown" th:each="page : ${cpagesList}"><a
+				class="nav-link dropdown-toggle" href="" id="dropdown01"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+				th:text="${page.name}"></a>
+				<div class="dropdown-menu" aria-labelledby="dropdown01">
+					<a class="dropdown-item" th:each="category : ${ccategoriesList}"
+						th:href="${'/view/'+category.slug}"
+						th:if="${category.pageId == page.id}" th:text="${category.name}"></a>
+				</div></li>
+		</ul>
+		<ul class="float-right navbar-nav" th:if="${principal == null}">
+			<li class="nav-item active"><a th:href="@{/register}"
+				class="nav-link">Register</a></li>
+			<li class="nav-item active"><a th:href="@{/login}"
+				class="nav-link">Login</a></li>
+		</ul>
+		<form th:if="${principal != null}" method="post"
+			th:action="@{/logout}">
+			<span class="text-white" th:text="${'Hi, '+ principal}"></span>
+			<button class="btn btn-secondary">Logout</button>
+		</form>
+	</div>
+</nav>
+
+
+
+
+<nav class="navbar navbar-expand-md navbar-dark mb-5 bg-dark"
+	th:fragment="nav-admin">
+	<a class="navbar-brand" href="/">Home Page</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarsExampleDefault"
+		aria-controls="navbarsExampleDefault" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link"
+				href="/admin/pages">Pages</a></li>
+			<li class="nav-item active"><a class="nav-link"
+				href="/admin/products">Products</a></li>
+			<li class="nav-item active"><a class="nav-link"
+				href="/admin/categories">Categories</a></li>
+		</ul>
+		<form th:if="${principal != null}" method="post"
+			th:action="@{/logout}">
+			<span class="text-white" th:text="${'Hi, '+ principal}"></span>
+			<button class="btn btn-secondary">Logout</button>
+		</form>
+	</div>
+</nav>

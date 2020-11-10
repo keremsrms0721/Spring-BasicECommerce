@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Kerem">
+
+<title>Home</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" th:href="@{/style/style.css}">
+<link rel="stylesheet" th:href="@{/style/mycss.css}">
+</head>
+<body>
+
+	<div th:replace="fragments/nav :: nav-frontend"></div>
+	<form class="text-center border border-light p-5" th:action="@{/login}"
+		method="post">
+		<h1>Login</h1>
+	<div class="alert alert-danger" th:if="${param.error}">
+		Invalid credentials
+	</div>
+		<h5 style="text-align: left;">Username:</h5>
+		<input type="text" class="form-control mb-4" name="username" id="username" placeholder="Username">
+
+		<h5 style="text-align: left;">Password</h5>
+		<input type="password" class="form-control mb-4"
+			placeholder="Password" name="password" id="password"> 
+		<button class="btn btn-primary" style="float: right;" type="submit">Sign in</button>
+		
+		<p>
+			Click <a th:href="@{/register}">here</a> to register
+		</p>
+	</form>
+	<!-- Default form login -->
+	<div th:replace="fragments/footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+@charset "ISO-8859-1";
+span.error{
+	color:red;
+}
+div.productAdded
+{
+	position:absolute;
+	bottom:5px;
+	left:110px;
+}
+div.hide{
+	display:none;
+}
+div.overlay{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:rgba(255,255,255,.9);
+}
+form#paypalform{
+	position:absolute;
+	left:-3000px;
+}

@@ -1,0 +1,12 @@
+<div class="col-3" th:fragment="categories">
+				<h2 class="display-6 mb-3">Categories</h2>
+				<ul class="list-group">
+					<li class="list-group-item">
+					<a class="nav-link"	href="/">All products</a></li>
+					<li class="list-group-item" th:each="category : ${ccategoriesList}">
+						<a class="nav-link" th:href="@{'/view/'+${category.slug}}"
+						th:text="${category.name}"></a>
+					</li>
+				</ul>
+				<div th:replace="fragments/cartPartial"></div>
+</div>

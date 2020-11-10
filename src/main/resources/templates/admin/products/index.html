@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Categories Page</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+	<div th:replace="fragments/nav :: nav-admin"></div>
+
+	<div class="container">
+		<div class="row">
+			<h1>Products</h1>
+		</div>
+		<p th:if="${message}" th:class="${'alert '+ alertClass}"
+			th:text="${message}"></p>
+			<div class="row">
+
+				<a href="products/add" class="btn btn-primary mb-3">Add Products</a>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Category Name</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product : ${productsList}">
+							<td th:text="${product.name}"></td>
+							<td th:text="${product.price}"></td>
+							<td th:text="${mapList[__product.categoriesId__]}"></td>
+							<td><a th:href="@{'/admin/products/delete/'+${product.id}}">Delete</a></td>
+							<td><a th:href="@{'/admin/products/edit/'+${product.id}}">Edit</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<ul class="pagination" th:if="${count > perPage}">
+					<li class="page-item"
+						th:each="number : ${#numbers.sequence(0,pageCount-1)}"
+						th:classappend="${numberOfPage==number} ? 'active' : ''"><a
+						th:href="@{${#httpServletRequest.requestURI}} + '?page=__${number}__'"
+						class="page-link" th:text="${number+1}"></a></li>
+				</ul>
+		
+			</div>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

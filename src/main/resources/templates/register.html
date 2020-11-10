@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Kerem">
+
+<title>Home</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" th:href="@{/style/style.css}">
+<link rel="stylesheet" th:href="@{/style/mycss.css}">
+</head>
+<body>
+
+	<div th:replace="fragments/nav :: nav-frontend"></div>
+	<form class="text-center border border-light p-5"
+		th:action="@{/register}" th:object="${user}" method="post">
+
+
+		<h1>Register</h1>
+
+		<p th:if="${message}" th:class="${'alert '+ alertClass}"
+			th:text="${message}"></p>
+
+		<h5 style="text-align: left;">Username:</h5>
+		<input type="text" class="form-control mb-4" placeholder="Username"
+			th:field="*{username}"> <span class="error"
+			th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+
+		<h5 style="text-align: left;">Password</h5>
+		<input type="password" class="form-control mb-4"
+			placeholder="Password" th:field="*{password}"> <span
+			class="error" th:if="${#fields.hasErrors('password')}"
+			th:errors="*{password}"></span>
+
+		<h5 style="text-align: left;">Confirm Password</h5>
+		<input type="password" class="form-control mb-4"
+			placeholder="Confirm Password" th:field="*{confirmPassword}">
+		<span class="error" th:if="${passwordMatchProblem}">Passwords do not match.</span>
+
+		<button class="btn btn-primary" style="float: right;" type="submit">Sign up</button>
+
+	</form>
+	<!-- Default form login -->
+	<div th:replace="fragments/footer"></div>
+
+</body>
+</html>
